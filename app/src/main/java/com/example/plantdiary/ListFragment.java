@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +60,7 @@ public class ListFragment extends Fragment {
         List<Item> itemList = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
+
             Item item = new Item();
             item.setName("plant " + i);
             item.setWaterInterval(5);

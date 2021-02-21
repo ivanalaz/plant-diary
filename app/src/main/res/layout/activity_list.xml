@@ -28,15 +28,7 @@
             android:layout_height="wrap_content" />
 
     </com.google.android.material.appbar.AppBarLayout>
-<!--
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="cursive"
-        android:text="Your plants"
-        android:gravity="center_horizontal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
--->
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"

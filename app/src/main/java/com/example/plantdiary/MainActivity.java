@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnSh
 
     private AddNewFragment addNewFragment;
     private ListFragment listFragment;
-   /* private Toolbar toolbar;
-    private ViewPager viewPager;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,27 +23,13 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnSh
 
         listFragment = new ListFragment();
         addNewFragment = new AddNewFragment();
-       // toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame, ListFragment.newInstance())
                     .commitNow();
         }
-/*
-        viewPager = findViewById(R.id.viewpager);
-        viewPager.setAdapter(getSupportFragmentManager();*/
     }
-/*
-    private void setSupportActionBar(Toolbar toolbar) {
-        ActionBar ab = null;
-        ab.setHomeAsUpIndicator(R.drawable.ic_add);
-    }
-*
-    private void setupViewPager(ViewPager viewPager) {
-        viewPager.setAdapter(Adapter);
-    }*/
 
     @Override
     public void showAddNewFragment() {
