@@ -1,5 +1,6 @@
 package com.example.plantdiary;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Item {
@@ -8,8 +9,8 @@ public class Item {
     private String description;
     private int waterInterval;
     private int fertInterval;
-    private Date lastWatered;
-    private Date lastFertilised;
+    private Calendar lastWatered;
+    private Calendar lastFertilised;
 
     public String getName() {
         return name;
@@ -43,19 +44,19 @@ public class Item {
         this.fertInterval = fertInterval;
     }
 
-    public Date getLastWatered() {
+    public Calendar getLastWatered() {
         return lastWatered;
     }
 
-    public void setLastWatered(Date lastWatered) {
+    public void setLastWatered(Calendar lastWatered) {
         this.lastWatered = lastWatered;
     }
 
-    public Date getLastFertilised() {
+    public Calendar getLastFertilised() {
         return lastFertilised;
     }
 
-    public void setLastFertilised(Date lastFertilised) {
+    public void setLastFertilised(Calendar lastFertilised) {
         this.lastFertilised = lastFertilised;
     }
 }

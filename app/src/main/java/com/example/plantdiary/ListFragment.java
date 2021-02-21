@@ -13,17 +13,23 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListFragment extends Fragment {
 
     RecyclerView recyclerView;
-    Button addNewButton;
+    FloatingActionButton fab;
     PlantsAdapter plantsAdapter;
     private OnShowAddNewFragmentListener callback;
 
     public ListFragment() {
+    }
+
+    public static ListFragment newInstance() {
+        return new ListFragment();
     }
 
     interface OnShowAddNewFragmentListener {
@@ -46,7 +52,7 @@ public class ListFragment extends Fragment {
         /* PRIMER */
         List<Item> itemList = new ArrayList<>();
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 10; i++) {
             Item item = new Item();
             item.setName("plant " + i);
             item.setWaterInterval(5);
@@ -55,9 +61,8 @@ public class ListFragment extends Fragment {
         plantsAdapter = new PlantsAdapter(itemList);
         recyclerView.setAdapter(plantsAdapter);
 
-        addNewButton = view.findViewById(R.id.addNewButton);
-
-        addNewButton.setOnClickListener(v -> callback.showAddNewFragment());
+        fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(v -> callback.showAddNewFragment());
 
         return view;
     }

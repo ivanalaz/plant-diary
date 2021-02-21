@@ -7,10 +7,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements ListFragment.OnShowAddNewFragmentListener {
+public class MainActivity extends AppCompatActivity implements ListFragment.OnShowAddNewFragmentListener, AddNewFragment.OnCancelAddingListener {
 
+    private AddNewFragment addNewFragment;
     private ListFragment listFragment;
-   // private Button addNewButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,18 +18,31 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnSh
         setContentView(R.layout.activity_main);
 
         listFragment = new ListFragment();
+        addNewFragment = new AddNewFragment();
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.add(R.id.frame, listFragment);
-        //transaction.add(R.id.addNewButton, listFragment);
-
-        transaction.commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame, ListFragment.newInstance())
+                    .commitNow();
+        }
     }
 
     @Override
     public void showAddNewFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-       // transaction.replace()
+        transaction.replace(R.id.frame, addNewFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        getFragmentManager().executePendingTransactions();
+    }
+
+    @Override
+    public void cancelAdding() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, listFragment);
+        transaction.remove(addNewFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        getFragmentManager().executePendingTransactions();
     }
 }
