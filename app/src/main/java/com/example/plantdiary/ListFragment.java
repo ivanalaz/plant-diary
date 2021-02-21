@@ -13,17 +13,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListFragment extends Fragment {
 
     RecyclerView recyclerView;
-    Button addNewButton;
+    FloatingActionButton fab;
     PlantsAdapter plantsAdapter;
+    TabLayout tabs;
     private OnShowAddNewFragmentListener callback;
 
     public ListFragment() {
+    }
+
+    public static ListFragment newInstance() {
+        return new ListFragment();
     }
 
     interface OnShowAddNewFragmentListener {
@@ -38,6 +46,10 @@ public class ListFragment extends Fragment {
         // inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_list, container, false);
 
+        tabs = view.findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText("Today"));
+        tabs.addTab(tabs.newTab().setText("All plants"));
+
         recyclerView = view.findViewById(R.id.recyclerView);
         // use a linear layout manager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
@@ -46,7 +58,7 @@ public class ListFragment extends Fragment {
         /* PRIMER */
         List<Item> itemList = new ArrayList<>();
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 20; i++) {
             Item item = new Item();
             item.setName("plant " + i);
             item.setWaterInterval(5);
@@ -55,9 +67,8 @@ public class ListFragment extends Fragment {
         plantsAdapter = new PlantsAdapter(itemList);
         recyclerView.setAdapter(plantsAdapter);
 
-        addNewButton = view.findViewById(R.id.addNewButton);
-
-        addNewButton.setOnClickListener(v -> callback.showAddNewFragment());
+        fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(v -> callback.showAddNewFragment());
 
         return view;
     }
