@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -26,6 +27,7 @@ public class ListFragment extends Fragment {
     FloatingActionButton fab;
     PlantsAdapter plantsAdapter;
     TabLayout tabs;
+    ViewPager viewPager;
     private OnShowAddNewFragmentListener callback;
 
     public ListFragment() {
@@ -50,7 +52,10 @@ public class ListFragment extends Fragment {
         tabs = view.findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("Today"));
         tabs.addTab(tabs.newTab().setText("All plants"));
-
+/*
+        viewPager = view.findViewById(R.id.viewpager);
+        tabs.setupWithViewPager(viewPager);
+*/
         recyclerView = view.findViewById(R.id.recyclerView);
         // use a linear layout manager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());

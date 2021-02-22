@@ -1,6 +1,7 @@
 package com.example.plantdiary;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public class AddNewFragment extends Fragment {
         fertSpinner = view.findViewById(R.id.fertSpinner);
 
         cancelButton.setOnClickListener(v -> callback.cancelAdding());
+
         return view;
     }
 

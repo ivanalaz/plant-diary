@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Plant Diary</string>
+    <string name="app_name">Plant Reminder</string>
     <string name="add_a_new_plant">Add a new plant</string>
     <string-array name="water_interval">
         <item>1</item>

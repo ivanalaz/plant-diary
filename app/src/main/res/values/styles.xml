@@ -4,9 +4,14 @@
     <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo"></style>
 
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">#673AB7</item>
-        <item name="colorPrimaryVariant">#512DA8</item>
-        <item name="colorSecondary">#FF4081</item>
+        <item name="colorPrimaryDark">#03855D</item>
+        <item name="colorPrimary">@color/green_500</item>
+        <item name="colorPrimaryVariant">@color/green_700</item>
+        <item name="colorSecondary">@color/green_700</item>
+    </style>
+
+    <style name="Theme.AppCompat.DayNight.DarkActionBar.Color" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimaryDark">#03855D</item>
     </style>
 
     <style name="Widget.CardContent" parent="android:Widget">
