@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.Calendar;
+
 public class AddNewFragment extends Fragment {
 
     private Button addButton;
@@ -24,12 +26,15 @@ public class AddNewFragment extends Fragment {
     private Spinner fertSpinner;
 
     private OnCancelAddingListener callback;
+    private OnAddToListFragment callbackAdd;
+
+    //public AddNewFragment() {}
 
     public interface OnCancelAddingListener {
         void cancelAdding();
     }
 
-    public interface onAddToListFragment {
+    public interface OnAddToListFragment {
         void addToListFragment(Item item);
     }
 
@@ -39,10 +44,22 @@ public class AddNewFragment extends Fragment {
         View view = inflater.inflate(R.layout.add_new_fragment, container, false);
         addButton = view.findViewById(R.id.addButton);
         cancelButton = view.findViewById(R.id.cancelButton);
-        nameEditText = view.findViewById(R.id.nameTextView);
+        nameEditText = view.findViewById(R.id.nameEditText);
         descEditText = view.findViewById(R.id.descEditText);
         waterSpinner = view.findViewById(R.id.waterSpinner);
         fertSpinner = view.findViewById(R.id.fertSpinner);
+
+        addButton.setOnClickListener(v -> {
+            Item item = new Item();
+            item.setName(nameEditText.getText().toString());
+           // item.setLastWatered(Calendar.getInstance());
+            item.setWaterInterval(Integer.parseInt(waterSpinner.getSelectedItem().toString()));
+
+            nameEditText.getText().clear();
+            waterSpinner.setSelection(0);
+
+            callbackAdd.addToListFragment(item);
+        });
 
         cancelButton.setOnClickListener(v -> callback.cancelAdding());
 
@@ -52,6 +69,10 @@ public class AddNewFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        callback = (OnCancelAddingListener) context;
+
+        //if (context instanceof OnCancelAddingListener)
+            callback = (OnCancelAddingListener) context;
+        //else
+            callbackAdd = (OnAddToListFragment) context;
     }
 }

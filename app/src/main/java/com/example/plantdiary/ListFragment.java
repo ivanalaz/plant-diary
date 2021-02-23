@@ -10,6 +10,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -27,11 +29,8 @@ public class ListFragment extends Fragment {
     FloatingActionButton fab;
     PlantsAdapter plantsAdapter;
     TabLayout tabs;
-    ViewPager viewPager;
+    //ViewPager viewPager;
     private OnShowAddNewFragmentListener callback;
-
-    public ListFragment() {
-    }
 
     public static ListFragment newInstance() {
         return new ListFragment();
@@ -61,7 +60,7 @@ public class ListFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        /* PRIMER */
+        /* PRIMER *
         List<Item> itemList = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
@@ -71,7 +70,7 @@ public class ListFragment extends Fragment {
             item.setWaterInterval(5);
             itemList.add(item);
         }
-        plantsAdapter = new PlantsAdapter(itemList);
+        plantsAdapter = new PlantsAdapter(itemList);*/
         recyclerView.setAdapter(plantsAdapter);
 
         fab = view.findViewById(R.id.fab);
@@ -84,6 +83,7 @@ public class ListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         plantsAdapter = new PlantsAdapter(new ArrayList<Item>());
+        setRetainInstance(true);
     }
 
     @Override
@@ -93,6 +93,7 @@ public class ListFragment extends Fragment {
     }
 
     public void addItem(Item item) {
-        // plantsAdapter.add(item);
+        plantsAdapter.add(item);
     }
+
 }
