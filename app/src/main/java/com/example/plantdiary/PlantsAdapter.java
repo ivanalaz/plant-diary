@@ -63,6 +63,6 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.PlantsView
 
     public void add(Item item) {
         itemList.add(item);
-        //notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 }

@@ -28,7 +28,7 @@ public class AddNewFragment extends Fragment {
     private OnCancelAddingListener callback;
     private OnAddToListFragment callbackAdd;
 
-    //public AddNewFragment() {}
+    public AddNewFragment() {}
 
     public interface OnCancelAddingListener {
         void cancelAdding();
@@ -69,10 +69,10 @@ public class AddNewFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
+        callbackAdd = (OnAddToListFragment) context;
         //if (context instanceof OnCancelAddingListener)
-            callback = (OnCancelAddingListener) context;
+        callback = (OnCancelAddingListener) context;
         //else
-            callbackAdd = (OnAddToListFragment) context;
+
     }
 }
