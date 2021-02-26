@@ -99,7 +99,7 @@ public class ListFragment extends Fragment {
         plantsAdapter = new PlantsAdapter(itemList);*/
         recyclerView.setAdapter(plantsAdapter);
 
-        fab = view.findViewById(R.id.fab);
+      //  fab = view.findViewById(R.id.fab);
 //        fab.setOnClickListener(v -> callback.showAddNewFragment());
 
         return view;

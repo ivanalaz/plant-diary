@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.Calendar;
 
 public class AddNewFragment extends Fragment {
@@ -24,6 +26,7 @@ public class AddNewFragment extends Fragment {
     private EditText descEditText;
     private Spinner waterSpinner;
     private Spinner fertSpinner;
+    private TabLayout tabLayout;
 
     private OnCancelAddingListener callback;
     private OnAddToListFragment callbackAdd;
@@ -48,6 +51,9 @@ public class AddNewFragment extends Fragment {
         descEditText = view.findViewById(R.id.descEditText);
         waterSpinner = view.findViewById(R.id.waterSpinner);
         fertSpinner = view.findViewById(R.id.fertSpinner);
+
+//        tabLayout = view.findViewById(R.id.tabs);
+//        tabLayout.setVisibility(View.GONE);
 
         addButton.setOnClickListener(v -> {
             Item item = new Item();

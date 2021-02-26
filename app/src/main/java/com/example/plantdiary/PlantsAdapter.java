@@ -1,5 +1,9 @@
 package com.example.plantdiary;
 
+import android.app.Activity;
+import android.content.ContentProvider;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +19,8 @@ import java.util.List;
 public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.PlantsViewHolder> {
     List<Item> itemList;
 
-    public PlantsAdapter(List<Item> itemList) {
-        this.itemList = itemList;
-    }
+
+    public PlantsAdapter(List<Item> itemList) { this.itemList = itemList; }
 
     @NonNull
     @Override

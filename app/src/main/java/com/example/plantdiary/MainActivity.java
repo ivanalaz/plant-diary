@@ -51,12 +51,19 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnSh
         addNewFragment = new AddNewFragment();
         listFragment = new ListFragment();
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame, ListFragment.newInstance(), "listFragment")
+                    .commitNow();
+        }
+
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
-            showAddNewFragment();
-          /*  Intent intent1 = new Intent(MainActivity.this, AddNewFragment.class);
-            startActivity(intent1); */
-            fab.setVisibility(View.INVISIBLE);
+           // showAddNewFragment();
+            Intent intent1 = new Intent(MainActivity.this, AddNewActivity.class);
+            startActivity(intent1);
+           // startActivity(new Intent(YourCurrentActivity.this,NewActivity.class));
+           // fab.setVisibility(View.INVISIBLE);
         });
 
 /* ovo je bilo
@@ -74,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnSh
         }*/
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public void onBackPressed() {
@@ -85,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnSh
         @Override
         public void showAddNewFragment() {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            tabLayout.setVisibility(View.GONE);
             if(addNewFragment.isAdded())
                 return;
             transaction.replace(R.id.frame, addNewFragment);
