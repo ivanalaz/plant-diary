@@ -20,7 +20,9 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.PlantsView
     List<Item> itemList;
 
 
-    public PlantsAdapter(List<Item> itemList) { this.itemList = itemList; }
+    public PlantsAdapter(List<Item> itemList) {
+
+        this.itemList = itemList; }
 
     @NonNull
     @Override

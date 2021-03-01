@@ -1,5 +1,6 @@
 package com.example.plantdiary;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -43,47 +44,32 @@ public class AddNewActivity extends AppCompatActivity {
         waterSpinner = findViewById(R.id.waterSpinner);
         fertSpinner = findViewById(R.id.fertSpinner);
 
-        /*
-        * buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                String text = editTextItem.getEditableText().toString() + ", " + radioButtonDone.isChecked() + ", " + textViewDate.getText();
-//                Toast.makeText(AddNewActivity.this, text, Toast.LENGTH_LONG ).show();
-                Intent data = new Intent();
-                data.putExtra("item", editTextItem.getEditableText().toString());
-                data.putExtra("status",radioButtonDone.isChecked());
-                data.putExtra("date", textViewDate.getText());
-                data.putExtra("time", textViewTime.getText());
-                setResult(Activity.RESULT_OK, data);
-                finish();
-            }
-        });*/
-
         ListFragment listFragment = new ListFragment();
         addButton.setOnClickListener(v -> {
-        /*    Intent data = new Intent();
+            Intent data = new Intent();
             data.putExtra("name", nameEditText.getEditableText().toString());
             //data.putExtra("description", descEditText.getEditableText().toString());
             data.putExtra("waterInterval", Integer.parseInt(waterSpinner.getSelectedItem().toString()));
-            setResult(RESULT_OK, data); */
-            Bundle b = new Bundle();
+            setResult(Activity.RESULT_OK, data);
+        /*    Bundle b = new Bundle();
             b.putString("name", nameEditText.getEditableText().toString());
             b.putInt("waterInterval", Integer.parseInt(waterSpinner.getSelectedItem().toString()));
-            listFragment.setArguments(b);
+            listFragment.setArguments(b);*/
             // fragmentTransaction.add(R.id.frameLayout, myFragment).commit();
             finish();
         });
 
         cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(v -> finish());
-/*
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+
     }
+
+    // IMPLEMENTACIJA addToListFragment ???
+
+
+
+    public String getMyData(){
+        return "getMyData method in AddNewActivity";
+    }
+
 }

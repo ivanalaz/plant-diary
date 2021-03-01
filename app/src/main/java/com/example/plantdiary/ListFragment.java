@@ -1,7 +1,10 @@
 package com.example.plantdiary;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +37,8 @@ public class ListFragment extends Fragment {
     ViewPager viewPager;
     private OnShowAddNewFragmentListener callback;
 
+    private final int LAUNCH_SECOND_ACTIVITY = 1;
+
     public ListFragment() {
 
     }
@@ -48,55 +53,39 @@ public class ListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // return super.onCreateView(inflater, container, savedInstanceState);
+         //super.onCreateView(inflater, container, savedInstanceState);
 
         // inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_list, container, false);
-/*  OVO JE BILO
-        tabs = view.findViewById(R.id.tabs);
-       tabs.addTab(tabs.newTab().setText("Today"));
-        tabs.addTab(tabs.newTab().setText("All plants"));
-*/
-   //     viewPager = view.findViewById(R.id.viewpager);
-       // setupViewPager(viewPager);
-      /*  PagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
-        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });*/
-
-   //     tabs.setupWithViewPager(viewPager);
 
         recyclerView = view.findViewById(R.id.recyclerView);
         // use a linear layout manager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        /* PRIMER *
+//        Bundle bundle = getArguments();
+//        if (bundle != null) {
+//            String name = getArguments().getString("name");
+//            int waterInterval = getArguments().getInt("waterInterval");
+
         List<Item> itemList = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-
+/* PRIMER *
+        for (int i = 0; i < 1; i++) {
             Item item = new Item();
-            item.setName("plant " + i);
-            item.setWaterInterval(5);
+           // item.setName(getActivity().getIntent().getExtras().getString("name"));
+           // item.setWaterInterval(getActivity().getIntent().getExtras().getInt("waterInterval"));
             itemList.add(item);
+            Log.i("inside ListFragment", getActivity().getIntent().getExtras().getString("name") + "");
         }
-        plantsAdapter = new PlantsAdapter(itemList);*/
+      /*  Intent intent = getActivity().getIntent();
+        startActivityForResult(intent, LAUNCH_SECOND_ACTIVITY);*/
+
+//        AddNewActivity activity = (AddNewActivity) getActivity();
+//        String myDataFromActivity = activity.getMyData();
+
+
+        plantsAdapter = new PlantsAdapter(itemList);
+      //  plantsAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(plantsAdapter);
 
       //  fab = view.findViewById(R.id.fab);
@@ -105,6 +94,26 @@ public class ListFragment extends Fragment {
         return view;
     }
 
+/*
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LAUNCH_SECOND_ACTIVITY) {
+            if(resultCode == Activity.RESULT_OK){
+                Log.i("PlantDiary", "onActivityResult RESULT_OK");
+                Item item = new Item();
+                item.setName(data.getStringExtra("name"));
+                item.setWaterInterval(data.getIntExtra("waterInterval", 1));
+                plantsAdapter.add(item);
+                Log.i("PlantDiary", "item name: " + item.getName());
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                Log.i("PlantDiary", "onActivityResult RESULT_CANCELED");
+            }
+        }
+    }
+*/
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
