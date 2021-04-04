@@ -1,14 +1,15 @@
 package com.example.plantdiary;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import com.example.plantdiary.db.entity.Plant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,16 +74,16 @@ public class TodayFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        List<Item> itemList = new ArrayList<>();
+        List<Plant> itemList = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
 
-            Item item = new Item();
+            Plant item = new Plant();
             item.setName("plant " + i);
             item.setWaterInterval(5);
             itemList.add(item);
         }
-        plantsAdapter = new PlantsAdapter(itemList);
+       // plantsAdapter = new PlantsAdapter(itemList);
         recyclerView.setAdapter(plantsAdapter);
         return view;
     }

@@ -1,16 +1,27 @@
-package com.example.plantdiary;
+package com.example.plantdiary.db.entity;
 
-import java.util.Calendar;
-import java.util.Date;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class Item {
-
+@Entity (tableName = "plant")
+public class Plant {
+    @PrimaryKey(autoGenerate = true)
+    private Integer id;
     private String name;
     private String description;
+    @ColumnInfo(name = "water_interval")
     private int waterInterval;
+    @ColumnInfo(name = "fert_interval")
     private int fertInterval;
+   /* @ColumnInfo(name = "last_watered")
     private Calendar lastWatered;
-    private Calendar lastFertilised;
+    @ColumnInfo(name = "last_fertilized")
+    private Calendar lastFertilised;*/
+
+    public Integer getId() { return id; }
+
+    public void setId(Integer id) { this.id = id; }
 
     public String getName() {
         return name;
@@ -43,7 +54,7 @@ public class Item {
     public void setFertInterval(int fertInterval) {
         this.fertInterval = fertInterval;
     }
-
+/*
     public Calendar getLastWatered() {
         return lastWatered;
     }
@@ -58,5 +69,5 @@ public class Item {
 
     public void setLastFertilised(Calendar lastFertilised) {
         this.lastFertilised = lastFertilised;
-    }
+    }*/
 }

@@ -1,19 +1,14 @@
 package com.example.plantdiary;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class AddNewActivity extends AppCompatActivity {
 
@@ -23,12 +18,6 @@ public class AddNewActivity extends AppCompatActivity {
     private EditText descEditText;
     private Spinner waterSpinner;
     private Spinner fertSpinner;
-
-    private AddNewFragment.OnAddToListFragment callback;
-
-    public interface OnAddToListFragment {
-        void addToListFragment(Item item);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,32 +33,20 @@ public class AddNewActivity extends AppCompatActivity {
         waterSpinner = findViewById(R.id.waterSpinner);
         fertSpinner = findViewById(R.id.fertSpinner);
 
-        ListFragment listFragment = new ListFragment();
         addButton.setOnClickListener(v -> {
             Intent data = new Intent();
-            data.putExtra("name", nameEditText.getEditableText().toString());
-            //data.putExtra("description", descEditText.getEditableText().toString());
-            data.putExtra("waterInterval", Integer.parseInt(waterSpinner.getSelectedItem().toString()));
-            setResult(Activity.RESULT_OK, data);
-        /*    Bundle b = new Bundle();
-            b.putString("name", nameEditText.getEditableText().toString());
-            b.putInt("waterInterval", Integer.parseInt(waterSpinner.getSelectedItem().toString()));
-            listFragment.setArguments(b);*/
-            // fragmentTransaction.add(R.id.frameLayout, myFragment).commit();
+            if (TextUtils.isEmpty(nameEditText.getText())) {
+                setResult(RESULT_CANCELED, data);
+            } else {
+                data.putExtra("name", nameEditText.getEditableText().toString());
+                data.putExtra("description", descEditText.getEditableText().toString());
+                data.putExtra("waterInterval", Integer.parseInt(waterSpinner.getSelectedItem().toString()));
+                setResult(RESULT_OK, data);
+            }
             finish();
         });
 
         cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(v -> finish());
-
     }
-
-    // IMPLEMENTACIJA addToListFragment ???
-
-
-
-    public String getMyData(){
-        return "getMyData method in AddNewActivity";
-    }
-
 }
