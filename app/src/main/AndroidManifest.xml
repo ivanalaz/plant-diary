@@ -9,10 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DesignDemo">
-      <!--   android:theme="@style/Theme.PlantDiary">
-      android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
-
-
+        <activity
+            android:name=".AddNewActivity"
+            android:label="@string/title_activity_add_new"
+            android:theme="@style/Theme.DesignDemo.NoActionBar"></activity>
+        <!--
+      android:theme="@style/Theme.PlantDiary">
+      android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
