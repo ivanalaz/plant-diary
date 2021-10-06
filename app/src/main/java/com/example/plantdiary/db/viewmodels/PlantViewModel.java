@@ -1,4 +1,4 @@
-package com.example.plantdiary.db;
+package com.example.plantdiary.db.viewmodels;
 
 import android.app.Application;
 
@@ -26,4 +26,14 @@ public class PlantViewModel extends AndroidViewModel {
     // Created a wrapper insert() method that calls the Repository's insert() method.
     // In this way, the implementation of insert() is encapsulated from the UI
     public void insert(Plant plant) { repository.insert(plant); }
+
+    public void update(Plant plant) { repository.update(plant); }
+
+    public void delete(Plant plant) { repository.delete(plant); }
+
+    public Plant getPlant(int id) { return repository.getPlant(id); }
+
+    public LiveData<List<Plant>> getRecents(int interval) { return repository.getRecents(interval); }
+
+    public List<Plant> getRecent(int interval) { return repository.getRecent(interval); }
 }

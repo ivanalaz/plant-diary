@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity (tableName = "plant")
 public class Plant {
     @PrimaryKey(autoGenerate = true)
@@ -14,10 +16,12 @@ public class Plant {
     private int waterInterval;
     @ColumnInfo(name = "fert_interval")
     private int fertInterval;
-   /* @ColumnInfo(name = "last_watered")
-    private Calendar lastWatered;
+    @ColumnInfo(name = "last_watered")
+    private Date lastWatered;
     @ColumnInfo(name = "last_fertilized")
-    private Calendar lastFertilised;*/
+    private Date lastFertilised;
+   // @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    private String image;
 
     public Integer getId() { return id; }
 
@@ -54,20 +58,16 @@ public class Plant {
     public void setFertInterval(int fertInterval) {
         this.fertInterval = fertInterval;
     }
-/*
-    public Calendar getLastWatered() {
-        return lastWatered;
-    }
 
-    public void setLastWatered(Calendar lastWatered) {
-        this.lastWatered = lastWatered;
-    }
+    public Date getLastWatered() { return lastWatered; }
 
-    public Calendar getLastFertilised() {
-        return lastFertilised;
-    }
+    public void setLastWatered(Date lastWatered) { this.lastWatered = lastWatered; }
 
-    public void setLastFertilised(Calendar lastFertilised) {
-        this.lastFertilised = lastFertilised;
-    }*/
+    public Date getLastFertilised() { return lastFertilised; }
+
+    public void setLastFertilised(Date lastFertilised) { this.lastFertilised = lastFertilised; }
+
+    public String getImage() { return image; }
+
+    public void setImage(String image) { this.image = image; }
 }

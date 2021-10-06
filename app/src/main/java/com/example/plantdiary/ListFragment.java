@@ -12,12 +12,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plantdiary.db.PlantViewModel;
+import com.example.plantdiary.db.viewmodels.PlantViewModel;
 
 public class ListFragment extends Fragment {
 
     RecyclerView recyclerView;
-    PlantsAdapter plantsAdapter = new PlantsAdapter(new PlantsAdapter.PlantDiff());
+    PlantsAdapter plantsAdapter;
 
     private PlantViewModel plantViewModel;
 
@@ -34,7 +34,7 @@ public class ListFragment extends Fragment {
         // use a linear layout manager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
 
-        plantsAdapter = new PlantsAdapter(new PlantsAdapter.PlantDiff());
+        plantsAdapter = new PlantsAdapter(new PlantsAdapter.PlantDiff(), getContext());
         recyclerView.setAdapter(plantsAdapter);
         recyclerView.setLayoutManager(layoutManager);
 

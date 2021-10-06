@@ -3,22 +3,18 @@ package com.example.plantdiary;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.plantdiary.db.entity.Plant;
@@ -28,65 +24,69 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddNewActivity extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity {
 
-    private Button addButton;
+    private Button saveButton;
     private Button cancelButton;
+    private ImageButton addPhoto;
     private EditText nameEditText;
     private EditText descEditText;
     private Spinner waterSpinner;
     private Spinner fertSpinner;
-    private ImageButton imageButton;
+    private static PlantViewModel viewModel;
 
-    private static final int EMPTY_TEXT = 13;
-
+    static int plantId;
+    private Plant plant;
     private static final int SELECT_PHOTO = 17;
     private static final String TAG = "ImagePicker";
     private static final String TEMP_IMAGE_NAME = "tempImage";
-    Uri selectedImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_edit);
 
-        addButton = findViewById(R.id.addButton);
-        cancelButton = findViewById(R.id.cancelButton);
+        Intent intent = getIntent();
+
+        plantId = intent.getIntExtra("plantId", -1);
+        viewModel = new ViewModelProvider(this).get(PlantViewModel.class);
+
+        plant = viewModel.getPlant(plantId);
+        Log.i("PLANT NAME", plant.getName());
+
         nameEditText = findViewById(R.id.nameEditText);
+        if (plant.getName() != null)
+            nameEditText.setText(plant.getName());
+
         descEditText = findViewById(R.id.descEditText);
+        if (plant.getDescription() != null)
+            descEditText.setText(plant.getDescription());
+
         waterSpinner = findViewById(R.id.waterSpinner);
+        waterSpinner.setSelection(plant.getWaterInterval()-1);
+
         fertSpinner = findViewById(R.id.fertSpinner);
-        imageButton = findViewById(R.id.imageButton);
+        fertSpinner.setSelection(plant.getFertInterval()-1);
 
-        PlantViewModel plantViewModel = new ViewModelProvider(this).get(PlantViewModel.class);
-
-        imageButton.setOnClickListener(v -> {
+        addPhoto = findViewById(R.id.addPhoto);
+        addPhoto.setOnClickListener(v -> {
             Intent chooseImageIntent = getPickImageIntent(this);
             startActivityForResult(chooseImageIntent, SELECT_PHOTO);
         });
 
-        addButton.setOnClickListener(v -> {
-            if (TextUtils.isEmpty(nameEditText.getText())) {
-                setResult(EMPTY_TEXT);
-            } else {
-                Plant plant = new Plant();
-                plant.setName(nameEditText.getEditableText().toString());
-                plant.setDescription(descEditText.getEditableText().toString());
-                plant.setWaterInterval(Integer.parseInt(waterSpinner.getSelectedItem().toString()));
-                plant.setFertInterval(Integer.parseInt(fertSpinner.getSelectedItem().toString()));
-                if (selectedImageUri != null)
-                    plant.setImage(selectedImageUri.toString());
-                plantViewModel.insert(plant);
-            }
+        saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(v -> {
+            plant.setName(nameEditText.getEditableText().toString());
+            plant.setDescription(descEditText.getEditableText().toString());
+            plant.setWaterInterval(Integer.parseInt(waterSpinner.getSelectedItem().toString()));
+            plant.setFertInterval(Integer.parseInt(fertSpinner.getSelectedItem().toString()));
+            viewModel.update(plant);
             finish();
         });
 
-        cancelButton = findViewById(R.id.cancelButton);
+        cancelButton = findViewById(R.id.cancelEditButton);
         cancelButton.setOnClickListener(v -> finish());
     }
-
     public static Intent getPickImageIntent(Context context) {
         Intent chooserIntent = null;
 
@@ -120,6 +120,7 @@ public class AddNewActivity extends AppCompatActivity {
         }
         return list;
     }
+
     private static File getTempFile(Context context) {
         File imageFile = new File(context.getExternalCacheDir(), TEMP_IMAGE_NAME);
         imageFile.getParentFile().mkdirs();
@@ -134,8 +135,9 @@ public class AddNewActivity extends AppCompatActivity {
             Log.i("requestCode", requestCode + "");
             Log.i("resultCode", resultCode + "");
             if (resultCode == RESULT_OK) {
-                selectedImageUri = data.getData();
-                imageButton.setImageURI(selectedImageUri);
+                Uri selectedImageUri = data.getData();
+                plant.setImage(selectedImageUri.toString());
+                viewModel.update(plant);
             }
         }
     }
