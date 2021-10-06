@@ -59,13 +59,13 @@
         android:layout_marginTop="64dp"
         android:gravity="center_horizontal"
         android:fontFamily="sans-serif-condensed"
-        android:text="@string/add_a_new_plant"
+        android:text="@string/edit_your_plant"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/addPhoto"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -135,7 +135,19 @@
         android:entries="@array/water_interval"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/descEditText" />
+<!--
+    <ImageButton
+        android:id="@+id/calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
+
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintBottom_toBottomOf="@+id/waterSpinner"
+        app:layout_constraintStart_toEndOf="@+id/waterSpinner"
+        />
+-->
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -148,20 +160,20 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/green_500"
-        android:text="@string/add"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fertSpinner"
-        app:layout_constraintVertical_bias="1.0"  />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/cancelButton"
+        android:id="@+id/cancelEditButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
@@ -171,6 +183,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fertSpinner"
-        app:layout_constraintVertical_bias="1.0"/>
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

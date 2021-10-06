@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface PlantDao {
 
-    @Query("SELECT * FROM plant")
+    @Query("SELECT * FROM plant ORDER BY last_watered ASC")
     LiveData<List<Plant>> getAll();
 
     @Insert
@@ -28,4 +28,15 @@ public interface PlantDao {
 
     @Query("DELETE FROM plant")
     void deleteAll();
+
+    @Query("SELECT * FROM plant WHERE id = :plantId")
+    Plant getPlant(int plantId);
+
+    //@Query("SELECT * FROM plant WHERE ((SELECT (JULIANDAY('now') - JULIANDAY(last_watered))) + water_interval) < 0")
+    //@Query("SELECT * FROM plant WHERE (date(CURRENT_TIMESTAMP / 1000,'unixepoch') - date(last_watered / 1000,'unixepoch')) < 1")
+    @Query("SELECT * FROM plant WHERE water_interval <= :interval")
+    LiveData<List<Plant>> getRecents(int interval);
+
+    @Query("SELECT * FROM plant WHERE water_interval <= :interval")
+    List<Plant> getRecent(int interval);
 }

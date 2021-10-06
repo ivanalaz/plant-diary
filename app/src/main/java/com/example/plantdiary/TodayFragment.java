@@ -6,62 +6,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.plantdiary.db.entity.Plant;
+import com.example.plantdiary.db.viewmodels.PlantViewModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TodayFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TodayFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private RecyclerView recyclerView;
     private PlantsAdapter plantsAdapter;
+    private PlantViewModel plantViewModel;
 
     public TodayFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TodayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TodayFragment newInstance(String param1, String param2) {
-        TodayFragment fragment = new TodayFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -72,19 +36,25 @@ public class TodayFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewToday);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
-
-
-        List<Plant> itemList = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-
-            Plant item = new Plant();
-            item.setName("plant " + i);
-            item.setWaterInterval(5);
-            itemList.add(item);
-        }
-       // plantsAdapter = new PlantsAdapter(itemList);
+        plantsAdapter = new PlantsAdapter(new PlantsAdapter.PlantDiff(), getContext());
         recyclerView.setAdapter(plantsAdapter);
+
+        plantViewModel = new ViewModelProvider(this).get(PlantViewModel.class);
+        plantViewModel.getRecents(1).observe(getViewLifecycleOwner(), plants -> {
+            // update the cached copy of the words in the adapter
+            List<Plant> todayList = new ArrayList<>();
+            for (Plant plant: plants) {
+                if ((dateDifference(new Date(), plant.getLastWatered()) + plant.getWaterInterval()) < 1) {
+                    todayList.add(plant);
+                }
+            }
+            plantsAdapter.submitList(plants);
+        });
         return view;
+    }
+
+    private long dateDifference(Date date1, Date date2) {
+        long diff = date2.getTime() - date1.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 }

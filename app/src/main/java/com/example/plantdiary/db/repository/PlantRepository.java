@@ -12,8 +12,8 @@ import java.util.List;
 
 public class PlantRepository {
 
-    private PlantDao plantDao;
-    private LiveData<List<Plant>> allPlants;
+    private final PlantDao plantDao;
+    private final LiveData<List<Plant>> allPlants;
 
     // You only need access to the DAO
     // There's no need to expose the entire database to the repository.
@@ -32,4 +32,24 @@ public class PlantRepository {
         PlantDatabase.databaseWriteExecutor.execute(() ->
                 plantDao.insert(plant));
     }
+
+    public void update(Plant plant) {
+        PlantDatabase.databaseWriteExecutor.execute(() ->
+                plantDao.update(plant));
+    }
+
+    public void delete(Plant plant) {
+        PlantDatabase.databaseWriteExecutor.execute(() ->
+                plantDao.delete(plant));
+
+    }
+
+    public Plant getPlant(int id) {
+        return plantDao.getPlant(id);
+    }
+
+    public LiveData<List<Plant>> getRecents(int interval) { return plantDao.getRecents(interval); }
+
+    public List<Plant> getRecent(int interval) { return plantDao.getRecent(interval); }
+
 }

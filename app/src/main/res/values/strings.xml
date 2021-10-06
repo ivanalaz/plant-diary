@@ -1,6 +1,25 @@
 <resources>
     <string name="app_name">Plant Reminder</string>
     <string name="add_a_new_plant">Add a new plant</string>
+    <string name="title_activity_add_new">AddNewActivity</string>
+    <string name="pick_image_intent_text">Choose image from...</string>
+
+    <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+    the big cheese.</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="fertilize">Fertilize</string>
+    <string name="water_interval">Water interval</string>
+    <string name="description">Description</string>
+    <string name="plant_name">Name</string>
+    <string name="save">Save</string>
+    <string name="edit_your_plant">Edit your plant</string>
+    <string name="dd_mm_yyyy">DD.MM.YYYY.</string>
+    <string name="last_fertilized">Last fertilized</string>
+
     <string-array name="water_interval">
         <item>1</item>
         <item>2</item>
@@ -13,15 +32,4 @@
         <item>9</item>
         <item>10</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_add_new">AddNewActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
